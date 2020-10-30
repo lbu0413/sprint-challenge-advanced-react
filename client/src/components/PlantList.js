@@ -6,8 +6,26 @@ export default class PlantList extends Component {
   constructor(){
     super()
     this.state = {
-      plants: [];
+      plants: []
     }
+  }
+  componentDidMount(){
+    this.fetchPlantsData(this.state.plants)
+  }
+
+  fetchPlantsData = () => {
+    fetch(`http://localhost:3333/plants`)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        this.setState({
+          plants: data.plantsData
+        })
+      })
+      .catch(err => {
+        debugger
+      })
   }
 
   // when the component mounts:
